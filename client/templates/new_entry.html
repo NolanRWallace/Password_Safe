@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+    <title>PwS new credentials</title>
+</head>
+<body>
+    <div id='wrapper'>
+        <div class="header">
+            {% load static %}
+                <h1 class='title' >
+                    <img src="{% static 'images/vaultlogo.png' %}" alt="vault" 
+                    style="position: relative; bottom: 15px;">
+
+                    Password Safe
+                </h1>
+        </div>
+        <div class='middle_col'>
+            <h2>Login</h2>
+            <div class='form'>
+                {% if messages %}
+                <ul class='errors'>
+                    {% for err in messages %}
+                    <li class='errors'>* {{ err }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="/login/process" method="POST">
+                    {% csrf_token %}
+                    <div class='form_row'>
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="">
+                    </div>
+                    <div class='form_row'>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="">
+                    </div>
+                    <input type="submit" value="Login" class='form_button'>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
