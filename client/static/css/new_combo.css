@@ -42,7 +42,7 @@ img{
 }
 
 .form{
-    width: 60%;
+    width: 80%;
     margin:auto;
     text-align: center;
 }
@@ -62,13 +62,25 @@ label{
     margin-right: 20px;
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
-    width: 40%
+    width: 25%
 }
 
 input{
     display: inline-block;
-    height: 30px;
-    font-size: 25px;
+    height: 22px;
+    font-size: 22px;
+}
+
+option{
+    display: inline-block;
+    height: 16px;
+    font-size: 16px;
+}
+
+select{
+    display: inline-block;
+    height: 25px;
+    font-size: 22px;
 }
 
 p{
@@ -78,9 +90,10 @@ p{
 
 .form_button{
     height: fit-content;
-    margin-top: 20px;
-    padding: 15px;
+    margin-left: 20px;
+    padding: 10px;
     border-radius: 5px;
+    /* display: inline-block */
 }
 
 .errors{

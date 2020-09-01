@@ -9,6 +9,10 @@ urlpatterns = [
     path('registration', views.reg_form),
     path('register', views.reg),
     path('home', views.home),
-    path('new/entry', views.new_entry),
+    path('new/data', views.new_data),
+    path('new/email', views.new_email),
+    path('new/password', views.new_password),
+    path('new/combo', views.new_combo,),
+    path('proccess/combo', views.add_combo), 
     
 ]

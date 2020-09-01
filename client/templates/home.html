@@ -3,9 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Password Safe Login</title>
 </head>
 <body>
-    <h1>made it {{request.session.user_name}}</h1>
+    <div id='wrapper'>
+        <div class="header">
+            {% load static %}
+                <h1 class='title' >
+                    <img src="{% static 'images/vaultlogo.png' %}" alt="vault" 
+                    style="position: relative; bottom: 15px;">
+
+                    Password Safe
+                </h1>
+        </div>
+        <div class='middle_col'>
+            <h2>Add a New Email Address</h2>
+            <div class='form'>
+                {% if messages %}
+                <ul class='errors'>
+                    {% for err in messages %}
+                    <li class='errors'>* {{ err }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <table>
+                        <th>Account</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        {% for combo in all_combos %}
+                        <tr>
+                            <td>
+                                {{combo.accountName}}
+                            </td>
+                            <td>
+                                {{combo.email.email}}
+                            </td>
+                            <td>
+                                {{combo.password.password}}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    
+                </table>
+                
+            </div>
+        </div>
+    </div>
 </body>
 </html>

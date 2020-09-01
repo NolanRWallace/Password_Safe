@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from .models import User, Combo
+from .models import User, Combo, Emails, Passwords
 import bcrypt
 
 def index(request):
@@ -48,7 +48,58 @@ def reg(request):
     return redirect('/home')
 
 def home(request):
-    return render(request, 'home.html')
+    current_user = User.objects.get(id=request.session['user_id'])
+    context = {
+        'all_combos' : current_user.combos.all(),
+    }
+    return render(request, 'home.html', context)
 
-def new_entry(request):
-    return render(request, 'new_entry.html')
+def new_data(request):
+    return render(request, 'new_data.html')
+
+def new_email(request):
+    errors = Emails.objects.email_validation(request.POST)
+    if len(errors) > 0:
+        for key, error in errors.items():
+            messages.error(request, error)
+        return redirect('/new_data')
+    elif request.POST['email'] != request.POST['confirm_email']:
+        messages.error(request, "Emails do not match, check and resubmit")
+        return redirect('/new_data')
+    current_user = User.objects.filter(id = request.session['user_id'])
+    Emails.objects.create(
+        email = request.POST['email'],
+        user = current_user[0]
+    )
+    return redirect('/home')
+
+def new_password(request):
+    if request.POST['password'] != request.POST['confirm_pw']:
+        messages.error(request, "Passwords do not match, try again")
+        return redirect('/new_data')
+    current_user = User.objects.filter(id = request.session['user_id'])
+    Passwords.objects.create(
+        password = request.POST['password'],
+        user = current_user[0]
+    )
+    return redirect('/home')
+
+def new_combo(request):
+    current_user = User.objects.get(id=request.session['user_id'])
+    context = {
+        'all_emails' : current_user.emails.all(),
+        'all_passwords' : current_user.passwords.all(),
+    }
+    return render(request, 'new_combo.html', context)
+
+def add_combo(request):
+    current_user = User.objects.get(id=request.session['user_id'])
+    this_email = Emails.objects.get(id = request.POST['email'])
+    this_password = Passwords.objects.get(id = request.POST['password'])
+    Combo.objects.create(
+        accountName = request.POST['accountName'],
+        email = this_email,
+        password = this_password,
+        user = current_user
+    )
+    return redirect('/home')

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
-    <title>Registration</title>
+    <link rel="stylesheet" href="{% static 'css/new_data.css' %}">
+    <title>Password Safe Login</title>
 </head>
 <body>
     <div id='wrapper'>
@@ -19,7 +19,7 @@
                 </h1>
         </div>
         <div class='middle_col'>
-            <h2>Registration</h2>
+            <h2>Add a New Email Address</h2>
             <div class='form'>
                 {% if messages %}
                 <ul class='errors'>
@@ -28,30 +28,31 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-                <form action="/register" method="POST">
+                <form action="/new/email" method="POST">
                     {% csrf_token %}
                     <div class='form_row'>
-                        <label for="f_name">First Name:</label>
-                        <input type="text" name="f_name" id="">
-                    </div>
-                    <div class='form_row'>
-                        <label for="l_name">Last Name:</label>
-                        <input type="text" name="l_name" id="">
-                    </div>
-                    <div class='form_row'>
-                        <label for="email">Email:</label>
+                        <label for="email">New Email Address:</label>
                         <input type="email" name="email" id="">
                     </div>
                     <div class='form_row'>
-                        <p>* Password must be at least 8 characters</p>
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" id="">
+                        <label for="confirm_email">Confirm Email Address:</label>
+                        <input type="email" name="confirm_email" id="">
+                    </div>
+                    <input type="submit" value="Submit" class='form_button'>
+                </form>
+                <h2>Or</h2>
+                <h2>Add a New Password</h2>
+                <form action="/new/password" method="POST">
+                    {% csrf_token %}
+                    <div class='form_row'>
+                        <label for="password">New Password:</label>
+                        <input type="text" name="password" id="">
                     </div>
                     <div class='form_row'>
-                        <label for="confirm_pw">Confirm Password</label>
-                        <input type="password" name='confirm_pw'>
+                        <label for="confirm_pw">Confirm Password:</label>
+                        <input type="text" name="confirm_pw" id="">
                     </div>
-                    <input type="submit" value="Register" class='form_button'>
+                    <input type="submit" value="Submit" class='form_button'>
                 </form>
             </div>
         </div>
