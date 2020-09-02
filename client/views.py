@@ -103,3 +103,11 @@ def add_combo(request):
         user = current_user
     )
     return redirect('/home')
+
+def edit_combo(request, combo_id):
+    return
+
+def delete_combo(request, combo_id):
+    combo = Combo.objects.get(id=combo_id)
+    combo.delete()
+    return redirect('/home')

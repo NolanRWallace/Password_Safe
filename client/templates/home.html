@@ -32,6 +32,7 @@
                         <th>Account</th>
                         <th>Email</th>
                         <th>Password</th>
+                        <th>Actions</th>
                         {% for combo in all_combos %}
                         <tr>
                             <td>
@@ -43,10 +44,12 @@
                             <td>
                                 {{combo.password.password}}
                             </td>
+                            <td>
+                                <a href="http://127.0.0.1:8000/combo/edit/{{combo.id}}">Edit</a> |&nbsp;
+                                <a href="http://127.0.0.1:8000/combo/delete/{{combo.id}}">Delete</a>
+                            </td>
                         </tr>
                     {% endfor %}
-
-                    
                 </table>
                 
             </div>
