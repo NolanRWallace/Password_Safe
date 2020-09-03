@@ -15,5 +15,6 @@ urlpatterns = [
     path('new/combo', views.new_combo,),
     path('proccess/combo', views.add_combo), 
     path('combo/edit/<int:combo_id>', views.edit_combo),
-    path('combo/delete/<int:combo_id>', views.delete_combo)
+    path('combo/delete/<int:combo_id>', views.delete_combo),
+    path('proccess/combo/edit/<int:combo_id>', views.proccess_edit_combo)
 ]

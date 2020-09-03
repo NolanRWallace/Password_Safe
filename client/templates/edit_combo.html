@@ -28,18 +28,16 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-                <form action="/proccess/combo" method="POST">
+                <form action="/proccess/combo/edit/{{combo.id}}" method="POST">
                     {% csrf_token %}
                     <div class='form_row'>
                         <label for="accountName">Account Name:</label>
-                        <input type="text" name='accountName'>
+                        <input type="text" name='accountName' value={{combo.accountName}}>
                     </div>
                     <div class='form_row'>
                         <label for="email">Email: </label>
                         <select name="email" id="">
-                            <option value="none">
-                                Select an Option
-                            </option>
+                            <option value={{combo.email.id}}>{{combo.email.email}}</option>
                             {% for email in all_emails %}
                             <option value={{email.id}}>{{email.email}}</option>
                         {% endfor %}
@@ -48,9 +46,7 @@
                     <div class='form_row'>
                         <label for="password">Password:</label>
                         <select name="password" id="">
-                            <option value="none">
-                                Select an Option
-                            </option>
+                            <option value={{combo.password.id}}>{{combo.password.password}}</option>
                             {% for pass in all_passwords %}
                             <option value={{pass.id}}>{{pass.password}}</option>
                             {% endfor %}

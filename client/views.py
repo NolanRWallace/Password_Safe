@@ -105,9 +105,28 @@ def add_combo(request):
     return redirect('/home')
 
 def edit_combo(request, combo_id):
-    return
+    current_user = User.objects.get(id=request.session['user_id'])
+    combo = Combo.objects.get(id=combo_id)
+    context = {
+        'all_emails' : current_user.emails.exclude(email = combo.email.email),
+        'all_passwords' : current_user.passwords.exclude(password = combo.password.password),
+        'combo' : Combo.objects.get(id=combo_id)
+    }
+    return render(request, 'edit_combo.html', context)
 
 def delete_combo(request, combo_id):
     combo = Combo.objects.get(id=combo_id)
     combo.delete()
     return redirect('/home')
+
+def proccess_edit_combo(request, combo_id):
+    # current_user = User.objects.get(id=request.session['user_id'])
+    combo = Combo.objects.get(id=combo_id)
+    this_email = Emails.objects.get(id = request.POST['email'])
+    this_password = Passwords.objects.get(id = request.POST['password'])
+    combo.accountName = request.POST['accountName'],
+    combo.password = this_password,
+    combo.email = this_email,
+    combo.save()
+    return redirect('/home')
+    
