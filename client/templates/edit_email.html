@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/new_data.css' %}">
+    <link rel="stylesheet" href="{% static 'css/new_email.css' %}">
     <title>Password Safe Login</title>
 </head>
 <body>
@@ -14,9 +14,15 @@
                 <h1 class='title' >
                     <img src="{% static 'images/vaultlogo.png' %}" alt="vault" 
                     style="position: relative; bottom: 15px;">
-
                     Password Safe
                 </h1>
+                <div class="nav_bar">
+                    <a href="http://127.0.0.1:8000/home" class='navbar_link'>Home</a> |&nbsp;
+                    <a href="http://127.0.0.1:8000/add/email" class='navbar_link'>Add New Email</a> |&nbsp;
+                    <a href="http://127.0.0.1:8000/add/password" class='navbar_link'>Add New Password</a> |&nbsp;
+                    <a href="http://127.0.0.1:8000/new/combo" class='navbar_link'>Add Combo</a> |&nbsp;
+                    <a href="http://127.0.0.1:8000/logout" class='navbar_link'>Logout</a>
+                </div>
         </div>
         <div class='middle_col'>
             <h2>Add a New Email Address</h2>
@@ -28,31 +34,17 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-                <form action="/new/email" method="POST">
+                <form action="/process/edit/email/{{email.id}}" method="POST">
                     {% csrf_token %}
                     <div class='form_row'>
                         <label for="email">New Email Address:</label>
-                        <input type="email" name="email" id="">
+                        <input type="email" name="email" id="" value={{email.email}}>
                     </div>
                     <div class='form_row'>
                         <label for="confirm_email">Confirm Email Address:</label>
                         <input type="email" name="confirm_email" id="">
                     </div>
-                    <input type="submit" value="Submit" class='form_button'>
-                </form>
-                <h2>Or</h2>
-                <h2>Add a New Password</h2>
-                <form action="/new/password" method="POST">
-                    {% csrf_token %}
-                    <div class='form_row'>
-                        <label for="password">New Password:</label>
-                        <input type="text" name="password" id="">
-                    </div>
-                    <div class='form_row'>
-                        <label for="confirm_pw">Confirm Password:</label>
-                        <input type="text" name="confirm_pw" id="">
-                    </div>
-                    <input type="submit" value="Submit" class='form_button'>
+                    <input type="submit" value="Update" class='form_button'>
                 </form>
             </div>
         </div>

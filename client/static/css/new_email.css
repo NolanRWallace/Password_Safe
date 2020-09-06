@@ -18,6 +18,16 @@
     padding-top: 35px;
 }
 
+.nav_bar{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+    .navbar_link{
+        text-decoration: none;
+    }
+
 
 img{
     width: 80px;

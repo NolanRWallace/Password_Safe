@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/new_combo.css' %}">
-    <title>PwS New Combo</title>
+    <link rel="stylesheet" href="{% static 'css/new_email.css' %}">
+    <title>Password Safe Login</title>
 </head>
 <body>
     <div id='wrapper'>
@@ -34,36 +34,33 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-                <form action="/proccess/combo" method="POST">
+                <form action="/new/email" method="POST">
                     {% csrf_token %}
                     <div class='form_row'>
-                        <label for="accountName">Account Name:</label>
-                        <input type="text" name='accountName'>
+                        <label for="email">New Email Address:</label>
+                        <input type="email" name="email" id="">
                     </div>
                     <div class='form_row'>
-                        <label for="email">Email: </label>
-                        <select name="email" id="">
-                            <option value="none">
-                                Select an Option
-                            </option>
-                            {% for email in all_emails %}
-                            <option value={{email.id}}>{{email.email}}</option>
-                        {% endfor %}
-                        </select>
-                    </div>
-                    <div class='form_row'>
-                        <label for="password">Password:</label>
-                        <select name="password" id="">
-                            <option value="none">
-                                Select an Option
-                            </option>
-                            {% for pass in all_passwords %}
-                            <option value={{pass.id}}>{{pass.password}}</option>
-                            {% endfor %}
-                        </select>
+                        <label for="confirm_email">Confirm Email Address:</label>
+                        <input type="email" name="confirm_email" id="">
                     </div>
                     <input type="submit" value="Submit" class='form_button'>
                 </form>
+                <table>
+                    <th>Email</th>
+                    <th>Actions</th>
+                    {% for email in all_emails %}
+                    <tr>
+                        <td>
+                            {{email.email}}
+                        </td>
+                        <td>
+                            <a href="http://127.0.0.1:8000/edit/email/{{email.id}}">Edit</a> |&nbsp;
+                            <a href="http://127.0.0.1:8000/email/delete/{{email.id}}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
             </div>
         </div>
     </div>

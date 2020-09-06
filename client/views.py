@@ -54,18 +54,29 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
-def new_data(request):
-    return render(request, 'new_data.html')
+def add_email(request):
+    current_user = User.objects.get(id=request.session['user_id'])
+    context = {
+        'all_emails' : current_user.emails.all()
+    }
+    return render(request, 'new_email.html', context)
+
+def add_password(request):
+    current_user = User.objects.get(id=request.session['user_id'])
+    context = {
+        'all_passwords' : current_user.passwords.all()
+    }
+    return render(request, 'new_password.html', context)
 
 def new_email(request):
     errors = Emails.objects.email_validation(request.POST)
     if len(errors) > 0:
         for key, error in errors.items():
             messages.error(request, error)
-        return redirect('/new_data')
+        return redirect('/add/email')
     elif request.POST['email'] != request.POST['confirm_email']:
         messages.error(request, "Emails do not match, check and resubmit")
-        return redirect('/new_data')
+        return redirect('/add/email')
     current_user = User.objects.filter(id = request.session['user_id'])
     Emails.objects.create(
         email = request.POST['email'],
@@ -110,23 +121,51 @@ def edit_combo(request, combo_id):
     context = {
         'all_emails' : current_user.emails.exclude(email = combo.email.email),
         'all_passwords' : current_user.passwords.exclude(password = combo.password.password),
-        'combo' : Combo.objects.get(id=combo_id)
+        'combo' : Combo.objects.get(id=combo_id),
     }
     return render(request, 'edit_combo.html', context)
+
+def edit_email(request, email_id):
+    # current_user = User.objects.get(id=request.session['user_id'])
+    email = Emails.objects.get(id=email_id)
+    context = {
+        'email' : email
+    }
+    return render(request, 'edit_email.html', context)
+
+def process_edit_email(request, email_id):
+    email = Emails.objects.get(id=email_id)
+    email.email = request.POST['email']
+    email.save()
+    return redirect('/add/email')
 
 def delete_combo(request, combo_id):
     combo = Combo.objects.get(id=combo_id)
     combo.delete()
     return redirect('/home')
 
+def delete_email(request, email_id):
+    email = Emails.objects.get(id=email_id)
+    email.delete()
+    return redirect('/add/email')
+
+def delete_password(request, pass_id):
+    password = Passwords.objects.get(id=pass_id)
+    password.delete()
+    return redirect('/add/password')
+
 def proccess_edit_combo(request, combo_id):
     # current_user = User.objects.get(id=request.session['user_id'])
     combo = Combo.objects.get(id=combo_id)
     this_email = Emails.objects.get(id = request.POST['email'])
     this_password = Passwords.objects.get(id = request.POST['password'])
-    combo.accountName = request.POST['accountName'],
-    combo.password = this_password,
-    combo.email = this_email,
+    combo.password = this_password
+    combo.accountName = request.POST['accountName']
+    combo.email = this_email
     combo.save()
     return redirect('/home')
+
+def logout(request):
+    request.session.flush()
+    return redirect('/login')
     
