@@ -46,6 +46,9 @@ def reg(request):
     return redirect('/home')
 
 def home(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
     context = {
         'all_combos' : current_user.combos.all(),
@@ -53,6 +56,9 @@ def home(request):
     return render(request, 'home.html', context)
 
 def add_email(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
     context = {
         'all_emails' : current_user.emails.all()
@@ -60,6 +66,9 @@ def add_email(request):
     return render(request, 'new_email.html', context)
 
 def add_password(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
     context = {
         'all_passwords' : current_user.passwords.all()
@@ -67,6 +76,9 @@ def add_password(request):
     return render(request, 'new_password.html', context)
 
 def new_email(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     errors = Emails.objects.email_validation(request.POST)
     if len(errors) > 0:
         for key, error in errors.items():
@@ -83,6 +95,9 @@ def new_email(request):
     return redirect('/home')
 
 def new_password(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     if request.POST['password'] != request.POST['confirm_pw']:
         messages.error(request, "Passwords do not match, try again")
         return redirect('/add/password')
@@ -99,6 +114,9 @@ def new_password(request):
     return redirect('/home')
 
 def new_combo(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
     context = {
         'all_emails' : current_user.emails.all(),
@@ -107,7 +125,15 @@ def new_combo(request):
     return render(request, 'new_combo.html', context)
 
 def add_combo(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
+    all_combos = Combo.objects.filter(user = current_user)
+    for combo in all_combos:
+        if combo.accountName.lower() == request.POST['accountName'].lower():
+            messages.error(request, "Account already exist")
+            return redirect('/new/combo')
     this_email = Emails.objects.get(id = request.POST['email'])
     this_password = Passwords.objects.get(id = request.POST['password'])
     Combo.objects.create(
@@ -119,6 +145,9 @@ def add_combo(request):
     return redirect('/home')
 
 def edit_combo(request, combo_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
     combo = Combo.objects.get(id=combo_id)
     context = {
@@ -129,6 +158,9 @@ def edit_combo(request, combo_id):
     return render(request, 'edit_combo.html', context)
 
 def edit_email(request, email_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     # current_user = User.objects.get(id=request.session['user_id'])
     email = Emails.objects.get(id=email_id)
     context = {
@@ -137,6 +169,9 @@ def edit_email(request, email_id):
     return render(request, 'edit_email.html', context)
 
 def process_edit_email(request, email_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     if request.POST['email'] != request.POST['confirm_email']:
         messages.error(request, "Emails do not match, check and resubmit")
         return redirect(f'/edit/email/{email_id}')
@@ -146,11 +181,17 @@ def process_edit_email(request, email_id):
     return redirect('/add/email')
 
 def delete_combo(request, combo_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     combo = Combo.objects.get(id=combo_id)
     combo.delete()
     return redirect('/home')
 
 def edit_password(request, pass_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     password = Passwords.objects.get(id=pass_id)
     context = {
         'password' : password
@@ -158,6 +199,9 @@ def edit_password(request, pass_id):
     return render(request, 'edit_password.html', context)
 
 def process_edit_password(request, pass_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     if request.POST['password'] != request.POST['confirm_pw']:
         messages.error(request, "Passwords do not match, try again")
         return redirect(f'/edit/password/{pass_id}')
@@ -167,16 +211,25 @@ def process_edit_password(request, pass_id):
     return redirect('/add/password')
 
 def delete_email(request, email_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     email = Emails.objects.get(id=email_id)
     email.delete()
     return redirect('/add/email')
 
 def delete_password(request, pass_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     password = Passwords.objects.get(id=pass_id)
     password.delete()
     return redirect('/add/password')
 
 def proccess_edit_combo(request, combo_id):
+    if 'user_id' not in request.session:
+        messages.error(request, "Must be logged in to access")
+        return redirect('/login')
     # current_user = User.objects.get(id=request.session['user_id'])
     combo = Combo.objects.get(id=combo_id)
     this_email = Emails.objects.get(id = request.POST['email'])

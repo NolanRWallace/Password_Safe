@@ -1,8 +1,7 @@
 Basic Deployment To-Do's
 ****add encryption to password model*****will need decrpyted for viewing(will need to be figured out)*****
 2) Unique Validations 
-    *No user with same email address
-    *user can't store duplicates of emails or passwords or combo(accountName)
+    *user can't store duplicates of combo(accountName)
 4) Sorting for Combo display tables (with edit links and delete(with pop-up confirmation))
 5)Responsive Design CSS styling for mobile tablet and various monitor sizes
 
