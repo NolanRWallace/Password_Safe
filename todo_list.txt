@@ -3,7 +3,6 @@ Basic Deployment To-Do's
 2) Unique Validations 
     *No user with same email address
     *user can't store duplicates of emails or passwords or combo(accountName)
-3) Edit and Delete functionalities for Combos, User Account, email, password (combo edit done)
 4) Sorting for Combo display tables (with edit links and delete(with pop-up confirmation))
 5)Responsive Design CSS styling for mobile tablet and various monitor sizes
 

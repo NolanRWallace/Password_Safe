@@ -4,7 +4,7 @@ from .models import User, Combo, Emails, Passwords
 import bcrypt
 
 def index(request):
-    return redirect('/login')
+    return redirect('/registration')
 
 def login_form(request):
     return render(request, 'login.html')
@@ -33,13 +33,11 @@ def reg(request):
             messages.error(request, error)
         return redirect('/registration')
     password = request.POST['password'].encode('utf-8')
-    confirm_pw = request.POST['confirm_pw'].encode('utf-8')
     User.objects.create(
         f_name = request.POST['f_name'],
         l_name = request.POST['l_name'],
         email = request.POST['email'],
         password = bcrypt.hashpw(password, bcrypt.gensalt()).decode(),
-        confirm_pw = bcrypt.hashpw(confirm_pw, bcrypt.gensalt()).decode(),
     )
     new_user = User.objects.filter(email=request.POST['email'])
     new_user = new_user[0]
@@ -87,7 +85,7 @@ def new_email(request):
 def new_password(request):
     if request.POST['password'] != request.POST['confirm_pw']:
         messages.error(request, "Passwords do not match, try again")
-        return redirect('/new_data')
+        return redirect('/add/password')
     current_user = User.objects.filter(id = request.session['user_id'])
     Passwords.objects.create(
         password = request.POST['password'],
@@ -134,6 +132,9 @@ def edit_email(request, email_id):
     return render(request, 'edit_email.html', context)
 
 def process_edit_email(request, email_id):
+    if request.POST['email'] != request.POST['confirm_email']:
+        messages.error(request, "Emails do not match, check and resubmit")
+        return redirect(f'/edit/email/{email_id}')
     email = Emails.objects.get(id=email_id)
     email.email = request.POST['email']
     email.save()
@@ -143,6 +144,22 @@ def delete_combo(request, combo_id):
     combo = Combo.objects.get(id=combo_id)
     combo.delete()
     return redirect('/home')
+
+def edit_password(request, pass_id):
+    password = Passwords.objects.get(id=pass_id)
+    context = {
+        'password' : password
+    }
+    return render(request, 'edit_password.html', context)
+
+def process_edit_password(request, pass_id):
+    if request.POST['password'] != request.POST['confirm_pw']:
+        messages.error(request, "Passwords do not match, try again")
+        return redirect(f'/edit/password/{pass_id}')
+    password = Passwords.objects.get(id=pass_id)
+    password.password = request.POST['password']
+    password.save()
+    return redirect('/add/password')
 
 def delete_email(request, email_id):
     email = Emails.objects.get(id=email_id)

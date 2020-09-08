@@ -34,7 +34,6 @@ class User(models.Model):
     l_name = models.CharField(max_length=50)
     email = models.EmailField()
     password = models.CharField(max_length=255)
-    confirm_pw = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     objects = UserManager()

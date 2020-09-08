@@ -22,5 +22,7 @@ urlpatterns = [
     path('email/delete/<int:email_id>', views.delete_email),
     path('password/delete/<int:pass_id>', views.delete_password),
     path('edit/email/<int:email_id>', views.edit_email),
-    path('process/edit/email/<int:email_id>', views.process_edit_email)
+    path('process/edit/email/<int:email_id>', views.process_edit_email),
+    path('edit/password/<int:pass_id>', views.edit_password),
+    path('process/edit/password/<int:pass_id>', views.process_edit_password),
 ]
