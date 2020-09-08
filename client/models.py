@@ -7,6 +7,10 @@ class UserManager(models.Manager):
     def reg_validation(self, form_data):
         errors = {}
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        all_users  = User.objects.all()
+        for user in all_users:
+            if form_data['email'] == user.email:
+                errors['unique'] = "Email is already registered to an account"
         if len(form_data['f_name']) < 2:
             errors['f_name'] = "First Name Must be at least 2 characters long"
         if len(form_data['l_name']) < 2:
@@ -32,7 +36,7 @@ class UserManager(models.Manager):
 class User(models.Model):
     f_name = models.CharField(max_length=50)
     l_name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     password = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -44,11 +48,15 @@ class EmailManager(models.Manager):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(form_data['email']):
             errors['email'] = "Must be a valid email address"
+        all_emails = Emails.objects.all()
+        for email in all_emails:
+            if email.email == form_data['email']:
+                errors['email'] = "Email already in use"
         return errors
         
     
 class Emails(models.Model):
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     user = models.ForeignKey(User, related_name='emails', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

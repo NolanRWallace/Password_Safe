@@ -86,10 +86,15 @@ def new_password(request):
     if request.POST['password'] != request.POST['confirm_pw']:
         messages.error(request, "Passwords do not match, try again")
         return redirect('/add/password')
-    current_user = User.objects.filter(id = request.session['user_id'])
+    current_user = User.objects.get(id = request.session['user_id'])
+    all_passwords = Passwords.objects.filter(user=current_user)
+    for password in all_passwords:
+        if request.POST['password'] == password.password:
+            messages.error(request, "That Password already exist")
+            return redirect('/add/password')
     Passwords.objects.create(
         password = request.POST['password'],
-        user = current_user[0]
+        user = current_user
     )
     return redirect('/home')
 
