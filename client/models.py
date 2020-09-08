@@ -32,7 +32,7 @@ class UserManager(models.Manager):
 class User(models.Model):
     f_name = models.CharField(max_length=50)
     l_name = models.CharField(max_length=50)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -48,7 +48,7 @@ class EmailManager(models.Manager):
         
     
 class Emails(models.Model):
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     user = models.ForeignKey(User, related_name='emails', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
