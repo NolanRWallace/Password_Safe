@@ -2,6 +2,10 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import User, Combo, Emails, Passwords
 import bcrypt
+from cryptography.fernet import Fernet
+from password_safe.settings import PASSWORD_KEY
+from .security import encrypt, decrypt
+
 
 def index(request):
     return redirect('/registration')
@@ -70,8 +74,12 @@ def add_password(request):
         messages.error(request, "Must be logged in to access")
         return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
+    all_passwords = current_user.passwords.all()
+    for password in all_passwords:
+        decrpyted = decrypt(password.password)
+        decrypted_pass.append(decrpyted)
     context = {
-        'all_passwords' : current_user.passwords.all()
+        'all_passwords' : all_passwords,
     }
     return render(request, 'new_password.html', context)
 
@@ -107,8 +115,9 @@ def new_password(request):
         if request.POST['password'] == password.password:
             messages.error(request, "That Password already exist")
             return redirect('/add/password')
+    encrypted_password = encrypt(request.POST['password'])
     Passwords.objects.create(
-        password = request.POST['password'],
+        password = encrypted_password,
         user = current_user
     )
     return redirect('/home')
