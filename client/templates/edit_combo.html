@@ -53,9 +53,11 @@
                     <div class='form_row'>
                         <label for="password">Password:</label>
                         <select name="password" id="">
-                            <option value={{combo.password.id}}>{{combo.password.password}}</option>
-                            {% for pass in all_passwords %}
-                            <option value={{pass.id}}>{{pass.password}}</option>
+                            {% for key, value in this_password.items %}
+                            <option value={{key}}>{{value}}</option>
+                            {% endfor %}
+                            {% for key, value in all_passwords.items %}
+                            <option value={{key}}>{{value}}</option>
                             {% endfor %}
                         </select>
                     </div>

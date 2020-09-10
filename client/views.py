@@ -54,8 +54,13 @@ def home(request):
         messages.error(request, "Must be logged in to access")
         return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
+    all_combos = current_user.combos.all()
+    decrypted_combos = {}
+    for combo in all_combos:
+        decrpyted = decrypt(combo.password.password)
+        decrypted_combos[combo.id] = [combo.accountName, combo.email.email, decrpyted]
     context = {
-        'all_combos' : current_user.combos.all(),
+        'all_combos' : decrypted_combos,
     }
     return render(request, 'home.html', context)
 
@@ -75,11 +80,12 @@ def add_password(request):
         return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
     all_passwords = current_user.passwords.all()
+    decrypted_pass = {}
     for password in all_passwords:
         decrpyted = decrypt(password.password)
-        decrypted_pass.append(decrpyted)
+        decrypted_pass[password.id] = decrpyted
     context = {
-        'all_passwords' : all_passwords,
+        'all_passwords' : decrypted_pass,
     }
     return render(request, 'new_password.html', context)
 
@@ -127,9 +133,14 @@ def new_combo(request):
         messages.error(request, "Must be logged in to access")
         return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
+    all_passwords = current_user.passwords.all()
+    decrypted_pass = {}
+    for password in all_passwords:
+        decrpyted = decrypt(password.password)
+        decrypted_pass[password.id] = decrpyted
     context = {
         'all_emails' : current_user.emails.all(),
-        'all_passwords' : current_user.passwords.all(),
+        'all_passwords' : decrypted_pass,
     }
     return render(request, 'new_combo.html', context)
 
@@ -159,10 +170,18 @@ def edit_combo(request, combo_id):
         return redirect('/login')
     current_user = User.objects.get(id=request.session['user_id'])
     combo = Combo.objects.get(id=combo_id)
+    all_passwords = current_user.passwords.exclude(password = combo.password.password)
+    this_password = {}
+    this_password[combo.password.id] = decrypt(combo.password.password)
+    decrypted_pass = {}
+    for password in all_passwords:
+        decrpyted = decrypt(password.password)
+        decrypted_pass[password.id] = decrpyted
     context = {
         'all_emails' : current_user.emails.exclude(email = combo.email.email),
-        'all_passwords' : current_user.passwords.exclude(password = combo.password.password),
+        'all_passwords' : decrypted_pass,
         'combo' : Combo.objects.get(id=combo_id),
+        'this_password' : this_password
     }
     return render(request, 'edit_combo.html', context)
 
@@ -202,8 +221,10 @@ def edit_password(request, pass_id):
         messages.error(request, "Must be logged in to access")
         return redirect('/login')
     password = Passwords.objects.get(id=pass_id)
+    decrypted_pass = decrypt(password.password)
     context = {
-        'password' : password
+        'password' : decrypted_pass,
+        'id' : password.id
     }
     return render(request, 'edit_password.html', context)
 
@@ -215,7 +236,7 @@ def process_edit_password(request, pass_id):
         messages.error(request, "Passwords do not match, try again")
         return redirect(f'/edit/password/{pass_id}')
     password = Passwords.objects.get(id=pass_id)
-    password.password = request.POST['password']
+    password.password = encrypt(request.POST['password'])
     password.save()
     return redirect('/add/password')
 

@@ -38,20 +38,20 @@
                         <th>Email</th>
                         <th>Password</th>
                         <th>Actions</th>
-                        {% for combo in all_combos %}
+                        {% for key, value in all_combos.items %}
                         <tr>
                             <td>
-                                {{combo.accountName}}
+                                {{value.0}}
                             </td>
                             <td>
-                                {{combo.email.email}}
+                                {{value.1}}
                             </td>
                             <td>
-                                {{combo.password.password}}
+                                {{value.2}}
                             </td>
                             <td>
-                                <a href="http://127.0.0.1:8000/combo/edit/{{combo.id}}">Edit</a> |&nbsp;
-                                <a href="http://127.0.0.1:8000/combo/delete/{{combo.id}}">Delete</a>
+                                <a href="http://127.0.0.1:8000/combo/edit/{{key}}">Edit</a> |&nbsp;
+                                <a href="http://127.0.0.1:8000/combo/delete/{{key}}">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}
