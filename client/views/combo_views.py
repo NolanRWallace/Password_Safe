@@ -1,8 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from ..models import User, Combo, Emails, Passwords
-import bcrypt
-from password_safe.settings import PASSWORD_KEY
+from ..models.user_model import User
+from ..models.password_model import Passwords
+from ..models.email_model import Emails
+from ..models.combo_model import Combo
 from ..security import encrypt, decrypt
 
 def new_combo(request):

@@ -19,5 +19,8 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('', include('client.urls'))
+    path('', include('client.urls.reg_login_urls')),
+    path('', include('client.urls.password_urls')),
+    path('', include('client.urls.email_urls')),
+    path('', include('client.urls.combo_urls')),
 ]

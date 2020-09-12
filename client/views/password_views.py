@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from ..models import User, Passwords
+from ..models.user_model import User
+from ..models.password_model import Passwords
 from password_safe.settings import PASSWORD_KEY
 from ..security import encrypt, decrypt
 

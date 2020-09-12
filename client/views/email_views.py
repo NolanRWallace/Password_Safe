@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from ..models import User, Emails
+from ..models.email_model import EmailManager, Emails
+from ..models.user_model import User
 
 
 def add_email(request):

@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from ..models import User, Combo, Emails, Passwords
-import bcrypt
-from password_safe.settings import PASSWORD_KEY
+from ..models.user_model import User, UserManager
+from ..models.combo_model import Combo
 from ..security import encrypt, decrypt
+import bcrypt
+
 
 
 def index(request):
