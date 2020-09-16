@@ -26,10 +26,10 @@ def new_email(request):
     elif request.POST['email'] != request.POST['confirm_email']:
         messages.error(request, "Emails do not match, check and resubmit")
         return redirect('/add/email')
-    current_user = User.objects.filter(id = request.session['user_id'])
+    current_user = User.objects.get(id = request.session['user_id'])
     Emails.objects.create(
         email = request.POST['email'],
-        user = current_user[0]
+        user = current_user
     )
     return redirect('/home')
 

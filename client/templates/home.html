@@ -15,24 +15,21 @@
                 style="position: relative; bottom: 15px;">
                 Password Safe
             </h1>
-            <div class="nav_bar">
+            <div class="nav_bar1">
                 <a href="http://127.0.0.1:8000/home" class='navbar_link'>Home</a> |&nbsp;
                 <a href="http://127.0.0.1:8000/add/email" class='navbar_link'>Add New Email</a> |&nbsp;
-                <a href="http://127.0.0.1:8000/add/password" class='navbar_link'>Add New Password</a> |&nbsp;
+                <a href="http://127.0.0.1:8000/add/password" class='navbar_link'>Add New Password</a>
+            </div>
+                <p class='hidden'> | </p>
+            <div class="nav_bar2">
                 <a href="http://127.0.0.1:8000/new/combo" class='navbar_link'>Add Combo</a> |&nbsp;
                 <a href="http://127.0.0.1:8000/logout" class='navbar_link'>Logout</a>
             </div>
         </div>
         <div class='middle_col'>
-            <h2>Add a New Email Address</h2>
-            <div class='form'>
-                {% if messages %}
-                <ul class='errors'>
-                    {% for err in messages %}
-                    <li class='errors'>* {{ err }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
+            <div class='block-spacer'>
+            </div>
+            <h2>Your Credentials</h2>
                 <table>
                         <th>Account</th>
                         <th>Email</th>
@@ -49,9 +46,9 @@
                             <td>
                                 {{value.2}}
                             </td>
-                            <td>
-                                <a href="http://127.0.0.1:8000/combo/edit/{{key}}">Edit</a> |&nbsp;
-                                <a href="http://127.0.0.1:8000/combo/delete/{{key}}">Delete</a>
+                            <td class='block'>
+                                <a href="http://127.0.0.1:8000/combo/edit/{{key}}" class='block'>Edit</a> 
+                                <a href="http://127.0.0.1:8000/combo/delete/{{key}}" class='block'>Delete</a>
                             </td>
                         </tr>
                     {% endfor %}
