@@ -75,7 +75,11 @@ def proccess_edit_combo(request, combo_id):
     if 'user_id' not in request.session:
         messages.error(request, "Must be logged in to access")
         return redirect('/login')
-    # current_user = User.objects.get(id=request.session['user_id'])
+    errors = Combo.objects.combo_edit_validation(request.POST, request.session['user_id'], combo_id)
+    if len(errors) > 0:
+        for key, error in errors.items():
+            messages.error(request, error)
+        return redirect(f'/combo/edit/{combo_id}')
     combo = Combo.objects.get(id=combo_id)
     this_email = Emails.objects.get(id = request.POST['email'])
     this_password = Passwords.objects.get(id = request.POST['password'])

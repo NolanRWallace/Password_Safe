@@ -19,6 +19,20 @@ class ComboManager(models.Manager):
             errors['password'] = "Please Select a Password"
         return errors
             
+    def combo_edit_validation(self, form_data, session_id, combo_id):
+        errors = {}
+        current_user = User.objects.get(id=session_id)
+        all_combos = Combo.objects.filter(user = current_user).exclude(id=combo_id)
+        if len(form_data['accountName']) < 2:
+            errors["accountName"] = "Account Name must be at least 2 characters long"
+        for combo in all_combos:
+            if combo.accountName.lower() == form_data['accountName'].lower():
+                errors['unique'] = "Account Name already in Use"
+        if form_data['email'] == "None":
+            errors['email'] = "Please Select an Email"
+        if form_data['password'] == "None":
+            errors['password'] = "Please Select a Password"
+        return errors
         
     
 class Combo(models.Model):
