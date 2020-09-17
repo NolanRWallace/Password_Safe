@@ -32,6 +32,12 @@ def add_combo(request):
         if combo.accountName.lower() == request.POST['accountName'].lower():
             messages.error(request, "Account already exist")
             return redirect('/new/combo')
+    if request.POST['email'] == "None":
+        messages.error(request, "Please Select an Email")
+        return redirect('/new/combo')
+    if request.POST['password'] == "None":
+        messages.error(request, "Please Select a Password")
+        return redirect('/new/combo')
     this_email = Emails.objects.get(id = request.POST['email'])
     this_password = Passwords.objects.get(id = request.POST['password'])
     Combo.objects.create(

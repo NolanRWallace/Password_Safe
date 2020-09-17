@@ -121,8 +121,16 @@ label{
 
 input{
     display: inline-block;
-    height: 30px;
-    font-size: 22px;
+    height: 26px;
+    font-size: 20px;
+    width: 100%;
+}
+
+select{
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+
 }
 
 p{
@@ -136,7 +144,8 @@ p{
     margin-top: 20px;
     padding: 15px;
     border-radius: 5px;
-    margin-bottom: 20px;;
+    margin-bottom: 20px;
+    width: fit-content;
 }
 
 .errors{
@@ -663,12 +672,16 @@ label{
 input{
     display: inline-block;
     height: 30px;
-    font-size: 25px;
+    font-size: 20px;
+    width: 40%;
 }
+
+
 select{
     display: inline-block;
     height: 30px;
-    font-size: 25px;
+    font-size: 20px;
+    width: 40%;
 }
 
 p{
@@ -684,6 +697,7 @@ p{
     border-radius: 5px;
     margin-bottom: 20px;
     font-size: 20px;
+    width: fit-content;
 }
 
 .errors{
