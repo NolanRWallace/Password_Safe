@@ -39,38 +39,30 @@ img{
     margin: auto;
     margin-top: 5px;
     text-align: center;
-    font-size: 20px;
+    font-size: 14px;
     display: block;
     max-width: 100%;
     padding-top: 20px;
 }
-
-    .navbar1_link{
-        text-decoration: none;
-    }
-    
-    .navbar1_link:hover{
-        text-decoration: underline;
-    }
     
 .nav_bar2{
     width: 100%;
     margin: auto;
     margin-top: 5px;
     text-align: center;
-    font-size: 20px;
+    font-size: 14px;
     display: block;
 
     max-width: 100%;
 }
 
-.navbar2_link{
-        text-decoration: none;
-    }
+a{
+    text-decoration: none;
+}
 
-    .navbar2_link:hover{
-        text-decoration: underline;
-    }
+a:hover{
+    text-decoration: underline;
+}
 
     .middle_col{
     width: 100%;
@@ -154,15 +146,6 @@ p{
     margin: 10px;
 }
 
-a{
-    text-decoration: none;
-    font-size: 20px;
-    margin-top: 40px;
-}
-
-a:hover{
-    text-decoration: underline;
-}
 
 table{
     margin: auto;

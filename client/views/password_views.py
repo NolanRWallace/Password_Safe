@@ -56,11 +56,17 @@ def process_edit_password(request, pass_id):
     if 'user_id' not in request.session:
         messages.error(request, "Must be logged in to access")
         return redirect('/login')
-    if request.POST['password'] != request.POST['confirm_pw']:
-        messages.error(request, "Passwords do not match, try again")
+    password = request.POST['password']
+    confirm_pw = request.POST['confirm_pw']
+    encrypted_password = encrypt(password)
+    encrypted_confirm_pw = encrypt(confirm_pw)
+    errors = Passwords.objects.password_edit_validation(pass_id, encrypted_password, encrypted_confirm_pw, request.session['user_id'])
+    if len(errors) > 0:
+        for key, error in errors.items():
+            messages.error(request, error)
         return redirect(f'/edit/password/{pass_id}')
     password = Passwords.objects.get(id=pass_id)
-    password.password = encrypt(request.POST['password'])
+    password.password = encrypted_password
     password.save()
     return redirect('/add/password')
 
