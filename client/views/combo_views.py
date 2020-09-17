@@ -26,18 +26,12 @@ def add_combo(request):
     if 'user_id' not in request.session:
         messages.error(request, "Must be logged in to access")
         return redirect('/login')
+    errors = Combo.objects.combo_validation(request.POST, request.session['user_id'])
+    if len(errors) > 0:
+        for key, error in errors.items():
+            messages.error(request, error)
+        return redirect('/new/combo')
     current_user = User.objects.get(id=request.session['user_id'])
-    all_combos = Combo.objects.filter(user = current_user)
-    for combo in all_combos:
-        if combo.accountName.lower() == request.POST['accountName'].lower():
-            messages.error(request, "Account already exist")
-            return redirect('/new/combo')
-    if request.POST['email'] == "None":
-        messages.error(request, "Please Select an Email")
-        return redirect('/new/combo')
-    if request.POST['password'] == "None":
-        messages.error(request, "Please Select a Password")
-        return redirect('/new/combo')
     this_email = Emails.objects.get(id = request.POST['email'])
     this_password = Passwords.objects.get(id = request.POST['password'])
     Combo.objects.create(
