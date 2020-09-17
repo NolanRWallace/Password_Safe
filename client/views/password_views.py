@@ -24,16 +24,16 @@ def new_password(request):
     if 'user_id' not in request.session:
         messages.error(request, "Must be logged in to access")
         return redirect('/login')
-    if request.POST['password'] != request.POST['confirm_pw']:
-        messages.error(request, "Passwords do not match, try again")
+    password = request.POST['password']
+    confirm_pw = request.POST['confirm_pw']
+    encrypted_password = encrypt(password)
+    encrypted_confirm_pw = encrypt(confirm_pw)
+    errors = Passwords.objects.password_validation(encrypted_password, encrypted_confirm_pw, request.session['user_id'])
+    if len(errors) > 0:
+        for key, error in errors.items():
+            messages.error(request, error)
         return redirect('/add/password')
     current_user = User.objects.get(id = request.session['user_id'])
-    all_passwords = Passwords.objects.filter(user=current_user)
-    for password in all_passwords:
-        if request.POST['password'] == password.password:
-            messages.error(request, "That Password already exist")
-            return redirect('/add/password')
-    encrypted_password = encrypt(request.POST['password'])
     Passwords.objects.create(
         password = encrypted_password,
         user = current_user
