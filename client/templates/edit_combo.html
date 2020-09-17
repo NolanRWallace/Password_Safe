@@ -18,13 +18,13 @@
                     Password Safe
                 </h1>
                 <div class="nav_bar1">
-                    <a href="http://127.0.0.1:8000/home" class='navbar_link'>Home</a> |&nbsp;
-                    <a href="http://127.0.0.1:8000/add/email" class='navbar_link'>Add New Email</a> |&nbsp;
-                    <a href="http://127.0.0.1:8000/add/password" class='navbar_link'>Add New Password</a>
+                    <a href="{% url 'home' %}" class='navbar_link'>Home</a> |&nbsp;
+                    <a href="{% url 'add_email' %}" class='navbar_link'>Add New Email</a> |&nbsp;
+                    <a href="{% url 'add_password' %}" class='navbar_link'>Add New Password</a>
                 </div>
                 <div class="nav_bar2">
-                    <a href="http://127.0.0.1:8000/new/combo" class='navbar_link'>Add Combo</a> |&nbsp;
-                    <a href="http://127.0.0.1:8000/logout" class='navbar_link'>Logout</a>
+                    <a href="{% url 'add_combo' %}" class='navbar_link'>Add Combo</a> |&nbsp;
+                    <a href="{% url 'logout' %}" class='navbar_link'>Logout</a>
                 </div>
         </div>
         <div class='middle_col'>
@@ -37,7 +37,7 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-                <form action="/proccess/combo/edit/{{combo.id}}" method="POST">
+                <form action="{% url 'process_edit_combo' combo.id %}" method="POST">
                     {% csrf_token %}
                     <div class='form_row'>
                         <label for="accountName">Account Name:</label>

@@ -14,7 +14,6 @@
                 <h1 class='title' >
                     <img src="{% static 'images/vaultlogo.png' %}" alt="vault" 
                     style="position: relative; bottom: 15px;">
-
                     Password Safe
                 </h1>
         </div>
@@ -28,7 +27,7 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-                <form action="/login/process" method="POST">
+                <form action="{% url 'process_login' %}" method="POST">
                     {% csrf_token %}
                     <div class='form_row'>
                         <label for="email">Email:</label>
@@ -40,7 +39,7 @@
                     </div>
                     <input type="submit" value="Login" class='form_button'>
                 </form>
-                <a href="http://127.0.0.1:8000/registration">Register?</a>
+                <a href="{% url 'registration' %}">Register?</a>
             </div>
         </div>
     </div>
