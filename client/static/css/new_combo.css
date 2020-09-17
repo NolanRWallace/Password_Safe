@@ -3,30 +3,548 @@
     padding: 0px;
 }
 
-#wrapper{
-    /* background-image: url("../images/goldvaultdoor.jpg"); */
-    width: 100vw;
+@media only screen and (min-width: 0px) and (max-width: 412px){
+
+    #wrapper{
+        width: 100vw;
     height: 100vh;
     margin: auto;
-    background-color: lightgreen;
+    background-color: rgb(255, 255, 255);
+    max-height: 100%;
 }
 
 .header{
-    background-color: lightslategray;
+    background-color: rgb(255, 255, 255);
     padding: 15px;
     margin: auto;
     padding-top: 35px;
 }
 
-.nav_bar{
-    width: 70%;
+
+img{
+    width: 55px;
+    height: 55px;
+    display: block;
     margin: auto;
-    text-align: center;
+    /* vertical-align: middle; */
 }
 
-    .navbar_link{
+.hidden{
+    display: inline-block;
+    font-size: 30px;
+}
+
+.nav_bar1{
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    max-width: 100%;
+    padding-top: 20px;
+}
+
+    .navbar1_link{
         text-decoration: none;
     }
+    
+    .navbar1_link:hover{
+        text-decoration: underline;
+    }
+    
+.nav_bar2{
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+
+    max-width: 100%;
+}
+
+.navbar2_link{
+        text-decoration: none;
+    }
+
+    .navbar2_link:hover{
+        text-decoration: underline;
+    }
+
+    .middle_col{
+    width: 100%;
+    background-color: white;
+    margin: auto;
+    height: 100vh;
+    max-height: 100%;
+}
+
+.title{
+    margin:auto;
+    text-align: center;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form{
+    width: 95%;
+    margin:auto;
+    text-align: center;
+    /* border: solid 2px; */
+    /* border-color: #1ac8f3; */
+    max-height: 100%;
+    /* border-bottom: solid 2px;
+    border-color: black; */
+}
+
+h2{
+    text-align: center;
+    padding: 20px;
+    font-size: 28px;
+}
+
+.form_row{
+    display: block;
+    margin: 20px;
+}
+
+label{
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%
+}
+
+input{
+    display: inline-block;
+    height: 30px;
+    font-size: 22px;
+}
+
+p{
+    text-align: center;
+    margin: auto;
+    width: 100%;
+}
+
+.form_button{
+    height: fit-content;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;;
+}
+
+.errors{
+    list-style-type: none;
+    color: red;
+    margin: 10px;
+}
+
+a{
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 40px;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+table{
+    margin: auto;
+    max-width: 100%;
+    margin-top: 20px;
+}
+
+    td{
+        font-size: 30px;
+        width: fit-content;
+        padding:4px;
+    }
+
+    th{
+        width: fit-content;
+        font-size: 30px;
+    }
+
+}
+
+@media only screen and (min-width: 412px) and (max-width: 770px){
+    
+#wrapper{
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    max-height: 100%;
+}
+
+.header{
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin: auto;
+    padding-top: 35px;
+}
+
+
+img{
+    width: 70px;
+    height: 70px;
+    display: block;
+    margin: auto;
+    /* vertical-align: middle; */
+}
+
+.hidden{
+    display: inline-block;
+    font-size: 30px;
+}
+
+.nav_bar1{
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    max-width: 100%;
+    padding-top: 20px;
+}
+
+.navbar1_link{
+        text-decoration: none;
+    }
+    
+    .navbar1_link:hover{
+        text-decoration: underline;
+    }
+
+    .nav_bar2{
+        width: 100%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    
+    max-width: 100%;
+}
+
+.navbar2_link{
+    text-decoration: none;
+    }
+    
+    .navbar2_link:hover{
+        text-decoration: underline;
+    }
+    
+.middle_col{
+    width: 100%;
+    background-color: white;
+    margin: auto;
+    height: 100vh;
+    max-height: 100%;
+}
+
+.title{
+    margin:auto;
+    text-align: center;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form{
+    width: 95%;
+    margin:auto;
+    text-align: center;
+    /* border: solid 2px; */
+    /* border-color: #1ac8f3; */
+    max-height: 100%;
+}
+
+h2{
+    text-align: center;
+    padding: 20px;
+    font-size: 32px;
+}
+
+.form_row{
+    display: block;
+    margin: 20px;
+}
+
+label{
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%
+}
+
+input{
+    display: inline-block;
+    height: 30px;
+    font-size: 22px;
+}
+
+p{
+    text-align: center;
+    margin: auto;
+    width: 100%;
+}
+
+.form_button{
+    height: fit-content;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.errors{
+    list-style-type: none;
+    color: red;
+    margin: 10px;
+}
+
+a{
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 40px;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+table{
+    margin: auto;
+    /* border: solid;
+    padding: 5px; */
+}
+
+    td{
+        font-size: 100%;
+        width: fit-content;
+        padding:8px;
+    }
+
+        .block{
+            width:20px
+        }
+
+    th{
+        width: fit-content;
+        font-size: 100%;
+        padding: 8px;
+    }
+
+}
+
+
+@media only screen and (min-width: 770px) and (max-width: 1024px){
+    
+#wrapper{
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    max-height: 100%;
+}
+
+.header{
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin: auto;
+    padding-top: 35px;
+}
+
+
+img{
+    width: 90px;
+    height: 90px;
+    display: block;
+    margin: auto;
+    /* vertical-align: middle; */
+}
+
+.hidden{
+    display: inline-block;
+    font-size: 30px;
+}
+
+.nav_bar1{
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    max-width: 100%;
+    padding-top: 20px;
+}
+
+.navbar1_link{
+    text-decoration: none;
+    }
+    
+    .navbar1_link:hover{
+        text-decoration: underline;
+    }
+
+.nav_bar2{
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    
+    max-width: 100%;
+}
+
+    .navbar2_link{
+        text-decoration: none;
+    }
+
+    .navbar2_link:hover{
+        text-decoration: underline;
+    }
+
+    .middle_col{
+    width: 100%;
+    background-color: white;
+    margin: auto;
+    height: 100vh;
+    max-height: 100%;
+}
+
+.title{
+    margin:auto;
+    text-align: center;
+    font-size: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.form{
+    width: 95%;
+    margin:auto;
+    text-align: center;
+    /* border: solid 2px; */
+    /* border-color: #1ac8f3; */
+    max-height: 100%;
+}
+
+h2{
+    text-align: center;
+    padding: 20px;
+    font-size: 40px;
+}
+
+.form_row{
+    display: block;
+    margin: 20px;
+}
+
+label{
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 34px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%
+}
+
+input{
+    display: inline-block;
+    height: 30px;
+    font-size: 34px;
+}
+
+p{
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    font-size: 32px;
+}
+
+.form_button{
+    height: fit-content;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    font-size: 22px;
+}
+
+.errors{
+    list-style-type: none;
+    color: red;
+    margin: 10px;
+}
+
+a{
+    text-decoration: none;
+    font-size: 30px;
+    margin-top: 60px;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+table{
+    margin: auto;
+    /* border: solid;
+    padding: 5px; */
+}
+
+    td{
+        font-size: 26px;
+        width: fit-content;
+        padding:8px;
+    }
+
+        .block{
+            width:20px
+        }
+
+    th{
+        width: fit-content;
+        font-size: 30px;
+        padding: 8px;
+    }
+
+}
+
+
+
+@media only screen and (min-width: 1025px){
+
+#wrapper{
+    /* background-image: url("../images/goldvaultdoor.jpg"); */
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+}
+
+.header{
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin: auto;
+    padding-top: 35px;
+}
 
 
 img{
@@ -36,6 +554,49 @@ img{
     margin: auto;
     vertical-align: middle;
 }
+
+.hidden{
+    display: inline-block;
+    font-size: 30px;
+}
+
+.nav_bar1{
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    max-width: 100%;
+    padding-top: 20px;
+}
+
+    .navbar1_link{
+        text-decoration: none;
+    }
+
+    .navbar1_link:hover{
+        text-decoration: underline;
+    }
+
+.nav_bar2{
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+
+    max-width: 100%;
+}
+
+    .navbar2_link{
+        text-decoration: none;
+    }
+
+    .navbar2_link:hover{
+        text-decoration: underline;
+    }
 
 .middle_col{
     width: 70%;
@@ -51,10 +612,34 @@ img{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+table{
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+    td{
+        font-size: 30px;
+        width: fit-content;
+        padding:8px;
+        max-width: 100%;
+    }
+
+
+    th{
+        width: fit-content;
+        font-size: 35px;
+        padding: 8px;
+        max-width: 100%;
+    }
+
 .form{
     width: 80%;
     margin:auto;
     text-align: center;
+    /* border: solid 5px;
+    border-color: #1ac8f3; */
+    padding: 15px;
 }
 
 h2{
@@ -72,38 +657,33 @@ label{
     margin-right: 20px;
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
-    width: 25%
+    width: 40%
 }
 
 input{
     display: inline-block;
-    height: 22px;
-    font-size: 22px;
+    height: 30px;
+    font-size: 25px;
 }
-
-option{
-    display: inline-block;
-    height: 16px;
-    font-size: 16px;
-}
-
 select{
     display: inline-block;
-    height: 25px;
-    font-size: 22px;
+    height: 30px;
+    font-size: 25px;
 }
 
 p{
-    text-align: right;
-    margin-right: 10%;
+    text-align: center;
+    margin: auto;
+    width: 100%;
 }
 
 .form_button{
     height: fit-content;
-    margin-left: 20px;
+    margin-top: 20px;
     padding: 10px;
     border-radius: 5px;
-    /* display: inline-block */
+    margin-bottom: 20px;
+    font-size: 20px;
 }
 
 .errors{
@@ -112,4 +692,14 @@ p{
     margin: 10px;
 }
 
+a{
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 40px;
+}
 
+a:hover{
+    text-decoration: underline;
+}
+
+}
