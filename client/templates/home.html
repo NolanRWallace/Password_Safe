@@ -28,6 +28,7 @@
         <div class='middle_col'>
             <div class='block-spacer'>
             </div>
+            {% if all_combos %}
             <h2>Your Credentials</h2>
                 <table>
                         <th>Account</th>
@@ -53,7 +54,7 @@
                         </tr>
                     {% endfor %}
                 </table>
-                
+                {% endif %}
             </div>
         </div>
     </div>

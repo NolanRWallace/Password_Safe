@@ -28,7 +28,7 @@ def new_email(request):
         email = request.POST['email'],
         user = current_user
     )
-    return redirect('/home')
+    return redirect('/add/email')
 
 def edit_email(request, email_id):
     if 'user_id' not in request.session:

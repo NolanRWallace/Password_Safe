@@ -38,7 +38,7 @@ def new_password(request):
         password = encrypted_password,
         user = current_user
     )
-    return redirect('/home')
+    return redirect('/add/password')
 
 def edit_password(request, pass_id):
     if 'user_id' not in request.session:

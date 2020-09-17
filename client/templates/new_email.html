@@ -48,6 +48,8 @@
                     </div>
                     <input type="submit" value="Submit" class='form_button'>
                 </form>
+                {% if all_emails %}
+                <h2>Your Emails</h2>
                 <table>
                     <th>Email</th>
                     <th>Actions</th>
@@ -63,6 +65,7 @@
                     </tr>
                 {% endfor %}
             </table>
+            {% endif %}
             </div>
         </div>
     </div>
