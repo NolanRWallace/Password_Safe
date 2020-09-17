@@ -16,6 +16,7 @@ from pathlib import Path
 env_path = Path('.') / '.env'
 load_dotenv(dotenv_path=env_path)
 PASSWORD_KEY = os.getenv("PASSWORD_KEY")
+MY_KEY = os.getenv("MY_KEY")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'pw-8bxf+y5i_bg)$4s*jc+hih536i@y3aer=+&s2-vou!m#qhl'
+SECRET_KEY = MY_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
