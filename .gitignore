@@ -1,3 +1,4 @@
+.env
 .security.py
 .vscode
 env/
